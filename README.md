@@ -43,8 +43,8 @@ npm install snowdb
 ```js
 import { SnowDB, SnowDBParser } from "snowdb";
 
-const db = new SnowDB("./path/to/storage");
-const doc = db.document('orders', SnowDBParser.OBJECT) // support OBJECT, STRING, BUFFER
+const db = new SnowDB("./path/to/storage").connect();
+const doc = db.document('orders', SnowDBParser.OBJECT) // support OBJECT, STRING, BUFFER 
 // Insert record
 await doc.save("user1", { orderId: 1, item: "Laptop", price: 1200 });
 
@@ -77,6 +77,12 @@ See docs: [https://yukiakai212.github.io/snowdb.js/](https://yukiakai212.github.
   - Faster on multi-core CPUs due to parallel loading.  
 
 > Designed for high-performance workloads where memory predictability, persistence, and O(1) access matter.
+
+---
+
+## Changelog
+
+See full release notes in [CHANGELOG.md][changelog-url]
 
 ---
 

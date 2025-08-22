@@ -1,6 +1,6 @@
 {
   "name": "snowdb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SnowDB – A lightweight, append-only key–value store optimized for speed and simplicity",
   "main": "./dist/index.cjs",
   "type": "module",
@@ -16,7 +16,8 @@
     "win32"
   ],
   "cpu": [
-    "x64"
+    "x64",
+    "arm64"
   ],
   "napi": {
     "binaryName": "snowdb"
@@ -24,14 +25,16 @@
   "releaseBinary": "bin",
   "scripts": {
     "test": "npm run build && npx vitest run --reporter verbose --coverage",
+    "test:release": "npx vitest run --reporter verbose --coverage",
     "format": "prettier --write **/*.{js,ts} && cargo fmt",
     "format:check": "prettier --check **/*.{js,ts} && cargo fmt --check",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "release": "npm run build:release && node publish.js",
+    "release": "npm run build:release && npm run build:ts",
     "build": "npx napi build --platform --package-json-path package.json -o bin && tsup",
-    "build:release": "npx napi build --release --platform --package-json-path package.json -o bin && tsup",
-    "docs": "npx typedoc ./src/index.ts"
+    "build:ts": "npx tsup",
+    "build:release": "npx napi build --release --platform --package-json-path package.json -o bin --target",
+    "docs": "npx typedoc"
   },
   "files": [
     "dist/*",
