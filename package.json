@@ -1,6 +1,6 @@
 {
   "name": "snowdb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "SnowDB – A lightweight, append-only key–value store optimized for speed and simplicity",
   "main": "./dist/index.cjs",
   "type": "module",
@@ -25,7 +25,8 @@
   "releaseBinary": "bin",
   "scripts": {
     "test": "npm run build && npx vitest run --reporter verbose --coverage",
-    "test:release": "npx vitest run --reporter verbose --coverage",
+    "test:release": "npx vitest run --reporter verbose --coverage && npm run test:sandbox",
+    "test:sandbox": "npx sandbox && npx tsx ./__tests__/sandbox.ts",
     "format": "prettier --write **/*.{js,ts} && cargo fmt",
     "format:check": "prettier --check **/*.{js,ts} && cargo fmt --check",
     "lint": "eslint src/**/*.ts",
@@ -85,6 +86,7 @@
   },
   "dependencies": {
     "@node-rs/helper": "^1.6.0",
-    "@yukiakai/find-up": "^1.1.5"
+    "@yukiakai/find-up": "^1.1.5",
+    "vanipath": "^1.0.7"
   }
 }
